@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  backend-user:
+    build: ./backend-user
+    ports:
+      - "50051:50051"
+    networks:
+      - app-net
+
+  bff:
+    build: ./bff
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend-user
+    networks:
+      - app-net
+    environment:
+      - GRPC_BACKEND_URL=backend-user:50051
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3001:3000"
+    depends_on:
+      - bff
+    networks:
+      - app-net
+
+networks:
+  app-net:

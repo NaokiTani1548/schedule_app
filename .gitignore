@@ -1,0 +1,56 @@
+# === Node.js / Yarn ===
+node_modules/
+yarn.lock
+npm-debug.log*
+yarn-error.log*
+.pnp.*
+.pnp
+
+# === Build outputs ===
+dist/
+build/
+*.tsbuildinfo
+
+# === Logs ===
+logs
+*.log
+
+# === Environment variables ===
+.env
+.env.*
+
+# === VSCode ===
+.vscode/
+
+# === Docker ===
+*.local
+Dockerfile.local
+docker-compose.override.yml
+
+# === OS system files ===
+.DS_Store
+Thumbs.db
+
+# === React / CRA ===
+frontend/.cache/
+frontend/.next/
+frontend/.parcel-cache/
+frontend/coverage/
+
+# === BFF / NestJS ===
+bff/.cache/
+bff/coverage/
+
+# === Backend-user / NestJS Microservice ===
+backend-user/.cache/
+backend-user/coverage/
+
+# === Test output ===
+coverage/
+*.lcov
+*.lcov.*
+
+# === Misc ===
+.idea/
+*.swp
+*.swo
