@@ -4,27 +4,40 @@ services:
   backend-user:
     build: ./backend-user
     ports:
-      - "50051:50051"
+      - "5000:5000"
+    volumes:
+      - ./backend-user:/app
+      - /app/node_modules
     networks:
       - app-net
 
   bff:
     build: ./bff
+    container_name: bff
     ports:
       - "3000:3000"
     depends_on:
       - backend-user
+    volumes:
+      - ./bff:/app
+      - /app/node_modules
     networks:
       - app-net
     environment:
-      - GRPC_BACKEND_URL=backend-user:50051
+      - GRPC_BACKEND_URL=backend-user:5000
 
   frontend:
     build: ./frontend
+    container_name: frontend
     ports:
       - "3001:3000"
     depends_on:
       - bff
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     networks:
       - app-net
 

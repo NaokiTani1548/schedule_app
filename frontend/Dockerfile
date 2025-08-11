@@ -1,7 +1,8 @@
 FROM node:20
 WORKDIR /app
 COPY package*.json ./
-RUN yarn install
+RUN npm install
 COPY . .
 EXPOSE 3000
-CMD ["yarn", "start"]
+ENV CHOKIDAR_USEPOLLING=true
+CMD ["npm", "start"]

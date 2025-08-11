@@ -13,7 +13,7 @@ import { UserService } from './user.service';
         options: {
           package: 'user',
           protoPath: join(__dirname, '../../proto/user.proto'),
-          url: process.env.GRPC_BACKEND_URL || 'localhost:50051',
+          url: process.env.GRPC_BACKEND_URL || 'localhost:5000',
         },
       },
     ]),

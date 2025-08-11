@@ -1,7 +1,7 @@
 FROM node:20
 WORKDIR /app
 COPY package*.json ./
-RUN yarn install
+RUN npm install
 COPY . .
-RUN yarn build
-CMD ["node", "dist/main"]
+EXPOSE 5000
+CMD ["npm", "run", "start:dev"]

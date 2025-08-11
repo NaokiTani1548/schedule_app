@@ -9,11 +9,11 @@ async function bootstrap() {
     options: {
       package: 'user',
       protoPath: join(__dirname, '../proto/user.proto'),
-      url: '0.0.0.0:50051',
+      url: '0.0.0.0:5000',
     },
   });
   await app.listen();
-  console.log('User service is running on gRPC port 50051');
+  console.log('User service is running on gRPC port 5000');
 }
 bootstrap();
 
