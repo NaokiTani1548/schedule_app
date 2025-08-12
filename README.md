@@ -31,16 +31,9 @@ schedule-app/
 ## 開発時メモ
 
 ```
-docker compose up --build
+docker compose build --no-cache
+docker compose up
 
 # フロントエンド: http://localhost:3001
 # GraphQL Playground: http://localhost:3000/graphql
-```
-
-or
-
-```
-# 各階層で
-yarn install
-yarn start
 ```

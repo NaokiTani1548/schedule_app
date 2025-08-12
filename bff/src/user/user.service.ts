@@ -1,9 +1,11 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import { User } from './user.model'
+import { User } from './user.model';
+import { lastValueFrom, Observable } from 'rxjs';
 
 interface UserServiceGrpc {
-  getUser(data: { id: string }): Promise<User>;
+  getUser(data: { id: string }): Observable<User>;
+  getUsers(data: {}): Observable<{ users: User[] }>;
 }
 
 @Injectable()
@@ -16,7 +18,13 @@ export class UserService implements OnModuleInit {
     this.userService = this.client.getService<UserServiceGrpc>('UserService');
   }
 
-  getUser(id: string): Promise<User> {
-    return this.userService.getUser({ id });
+  async getUser(id: string): Promise<User> {
+    return await lastValueFrom(this.userService.getUser({ id }));
+  }
+
+  async getUsers(): Promise<User[]> {
+    const res = await lastValueFrom(this.userService.getUsers({}));
+    console.log('getUsers response:', res);
+    return res?.users ?? [];
   }
 }

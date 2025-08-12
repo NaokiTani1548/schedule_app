@@ -10,6 +10,11 @@ export class UserResolver {
   async getUser(@Args('id') id: string) {
     return this.userService.getUser(id);
   }
+
+  @Query('getUsers')
+  async users() {
+    return this.userService.getUsers();  // 複数ユーザーを返す想定
+  }
 }
 
 // code-first

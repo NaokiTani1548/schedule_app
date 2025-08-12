@@ -11,4 +11,9 @@ export class UserService {
     const user = this.users.find((u) => u.id === id);
     return user || { id, name: 'Unknown User' };
   }
+
+  getUsers() {
+    console.log('getUsers called:', this.users);
+    return { users: this.users };
+  }
 }
