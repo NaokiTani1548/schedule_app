@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   backend-user:
     build: ./backend-user
@@ -7,6 +5,16 @@ services:
       - "5000:5000"
     volumes:
       - ./backend-user:/app
+      - /app/node_modules
+    networks:
+      - app-net
+  
+  backend-task:
+    build: ./backend-task
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./backend-task:/app
       - /app/node_modules
     networks:
       - app-net
