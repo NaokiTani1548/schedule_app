@@ -32,7 +32,8 @@ services:
     networks:
       - app-net
     environment:
-      - GRPC_BACKEND_URL=backend-user:5000
+      - GRPC_BACKEND_USER_URL=backend-user:5000
+      - GRPC_BACKEND_TASK_URL=backend-task:5001
 
   frontend:
     build: ./frontend

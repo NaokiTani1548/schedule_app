@@ -1,12 +1,13 @@
 import { useQuery } from '@apollo/client';
 import { Container, Typography, CircularProgress, List, ListItem, ListItemText } from '@mui/material';
-import { GET_USERS, GET_USER } from '../graphql/queries';
+import { GET_USERS, GET_USER, GET_TASK } from '../graphql/queries';
 
 export function UserList() {
   const { loading, error, data } = useQuery(GET_USERS);
+  const { data: taskData, loading: taskLoading, error: taskError } = useQuery(GET_TASK);
 
-  if (loading) return <CircularProgress />;
-  if (error) return <Typography color="error">Error: {error.message}</Typography>;
+  if (loading || taskLoading) return <CircularProgress />;
+  if (error || taskError) return <Typography color="error">Fail to query</Typography>;
 
   return (
     <Container>
@@ -24,6 +25,17 @@ export function UserList() {
       {/* <Typography variant="h4">ユーザー情報</Typography>
       <Typography>ID: {data.getUser.id}</Typography>
       <Typography>名前: {data.getUser.name}</Typography> */}
+      <Typography variant="h5" gutterBottom>タスク情報</Typography>
+      {taskData && taskData.getTask ? (
+        <div>
+          <Typography>ID: {taskData.getTask.taskId}</Typography>
+          <Typography>タイトル: {taskData.getTask.title}</Typography>
+          <Typography>説明: {taskData.getTask.description}</Typography>
+          <Typography>完了: {taskData.getTask.completed ? "済" : "未"}</Typography>
+        </div>
+      ) : (
+        <Typography>タスク情報がありません</Typography>
+      )}
     </Container>
   );
 }

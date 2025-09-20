@@ -7,27 +7,28 @@ import { TaskService } from './task.service';
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
-  @GrpcMethod('TaskService', 'CreateTask')
+  @GrpcMethod('TaskService', 'createTask')
   createTask(data: { userId: string, title: string, description: string }) {
     return this.taskService.createTask(data.userId, data.title, data.description);
   }
 
-  @GrpcMethod('TaskService', 'GetTask')
+  @GrpcMethod('TaskService', 'getTask')
   getTask(data: { taskId: string }) {
+    console.log('call getTask gRPC method in TaskController');
     return this.taskService.getTask(data.taskId);
   }
 
-  @GrpcMethod('TaskService', 'GetTasks')
+  @GrpcMethod('TaskService', 'getTasks')
   getTasks(data: { userId: string }) {
     return this.taskService.getTasks(data.userId);
   }
 
-  @GrpcMethod('TaskService', 'UpdateTask')
+  @GrpcMethod('TaskService', 'updateTask')
   updateTask(data: { taskId: string, userId: string,  title: string, description: string, completed: boolean }) {
     return this.taskService.updateTask(data.taskId, data.userId, data.title, data.description, data.completed);
   }
 
-  @GrpcMethod('TaskService', 'DeleteTask')
+  @GrpcMethod('TaskService', 'deleteTask')
   deleteTask(data: { taskId: string }) {
     return this.taskService.deleteTask(data.taskId) ? {} : null;
   }
